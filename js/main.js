@@ -15,9 +15,11 @@ let app = new Vue({
             }
         },
 
-        // removeItem:function(){
-            
-        // }
+        removeItem:function(itemID){
+            this.lists = this.lists.filter(o => {
+                return o.id !== itemID;
+            })
+        }
     },
     mounted() {
 
