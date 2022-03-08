@@ -5,14 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="css/main.css">
-        <title>My VueJS app</title>
+        <title>To Do App</title>
     </head>
     <body>
         <div id="vueApp">
-            <h1 class="welcome">{{welcomeMessage}}</h1>
-            <input class="welcome" v-model="welcomeMessage" />
-        </div>
+            <h1 class="title" v-text="title"></h1>
+            <input v-model="newItem" v-on:keyup.enter="addItem"/>
+            <span><button @click.prevent="addItem">Add</button></span>
 
+            <ul v-for="list in lists" vbind:key="list.id" style="list-style-type:none;">
+                <li><input type="checkbox">{{list.item}}</li>
+            </ul> 
+        
+        </div>
 
         <script src="js/vue.min.js"></script>
         <script src="js/main.js"></script>
