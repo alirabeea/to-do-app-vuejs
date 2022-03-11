@@ -14,7 +14,6 @@ let app = new Vue({
                 this.newItem = '';
             }
             this.saveState();
-            console.log(window.localStorage)
         },
 
         removeItem:function(itemID){
@@ -22,32 +21,31 @@ let app = new Vue({
                 return o.id !== itemID;
             })
             const ls = window.localStorage;
-            console.log(itemID)
-            ls.removeItem("Task"+itemID);
+            ls.removeItem("Item"+itemID);
         },
 
         saveState:function(){
             const ls = window.localStorage;
-            let i = 1;
             this.lists.forEach(list => {
-                ls.setItem("Task"+list.id, list.item);
-                i++;
+                const task = JSON.stringify(list);
+                if(!ls.getItem("Item"+list.id)){
+                    ls.setItem("Item"+(ls.length+1), task);
+                }
             });
         },
 
         restoreState:function(){
             const ls = window.localStorage;
-            const length = ls.length;
-            const keys = Object.keys(ls);
-            console.log(keys);
             if(this.lists !== null){
                 this.lists = [];
             }
-            for(let j = 0; j < length; j++){
-                const task = ls.getItem(keys[j]);
-                const id = keys[j].split("k");
-                this.lists.push({id: id[1],item: task});
-            };
+            if(ls.length !== 0){
+                for(let task in ls){
+                    if (localStorage.hasOwnProperty(task)) {
+                        this.lists.push(JSON.parse(ls.getItem(task)));
+                    }
+                }
+            }
         },
 
         clearState:function(){
@@ -59,6 +57,5 @@ let app = new Vue({
 
     mounted() {
         this.restoreState();
-        console.log(window.localStorage)
     },
 });
