@@ -19,7 +19,7 @@
                             <button @click.prevent="clearState">Clear All Tasks</button>
                         </span>
                         <ul v-for="list in lists" vbind:key="list.id" style="list-style-type:none;">
-                            <li><input type="checkbox" v-model="list.completed" @change="setComplete(list.id, this)">{{list.item}}<button @click.prevent="removeItem(list.id)">Delete</button></li>
+                            <li><input type="checkbox" v-model="list.completed" @click="setComplete(list.id, this)">{{list.item}}<button @click.prevent="removeItem(list.id)">Delete</button></li>
                         </ul> 
                     </div>
 

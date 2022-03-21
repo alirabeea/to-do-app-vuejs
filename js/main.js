@@ -28,12 +28,16 @@ let app = new Vue({
         setComplete:function(itemID){
             this.lists.forEach(task => {
                 if(task.id === itemID){
-                    if(task.completed){
+                    console.log(task.completed);
+                    if(task.completed === true){
+                        console.log("changed");
                         task.completed = false;
                     }
                     else{
+                        console.log("not changed");
                         task.completed = true;
                     }
+                    console.log(task.completed);
                 }
             });
             
