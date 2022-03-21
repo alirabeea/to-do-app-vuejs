@@ -25,40 +25,23 @@ let app = new Vue({
             })
         },
 
-        setComplete:function(itemID){
-            this.lists.forEach(task => {
-                if(task.id === itemID){
-                    console.log(task.completed);
-                    if(task.completed === true){
-                        console.log("changed");
-                        task.completed = false;
-                    }
-                    else{
-                        console.log("not changed");
-                        task.completed = true;
-                    }
-                    console.log(task.completed);
-                }
-            });
-            
+        setComplete:function(item){
+            item.completed = !item.completed;  
         },
 
         saveState:function(){
-            const ls = window.localStorage;
-            ls.setItem("TODO", JSON.stringify(this.lists));
+            window.localStorage.setItem("TODO", JSON.stringify(this.lists));
         },
 
         restoreState:function(){
-            const ls = window.localStorage;
             if(this.lists !== null){
                 this.lists = [];
             }
-            this.lists = JSON.parse(ls.getItem("TODO"));
+            this.lists = JSON.parse(window.localStorage.getItem("TODO"));
         },
 
         clearState:function(){
-            const ls = window.localStorage;
-            ls.clear();
+            window.localStorage.clear();
             this.restoreState();
         }
     },
