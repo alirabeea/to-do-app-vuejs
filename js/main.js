@@ -10,7 +10,6 @@ let app = new Vue({
             if(this.lists === null){
                 this.lists = [];
             }
-            console.log(this.lists);
             let id = this.lists.length + 1;
             if(this.newItem !== ''){
                 const newList = {id:id,item:this.newItem, completed: false};
@@ -48,8 +47,7 @@ let app = new Vue({
 
     watch: {
         lists: {
-            handler(newLists, oldLists){
-                this.lists = newLists;
+            handler(){
                 this.saveState();
             },
             deep: true
